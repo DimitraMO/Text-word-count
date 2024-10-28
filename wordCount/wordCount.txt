@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+int main() {
+    FILE *Word_Count;
+    int in_word=0; 
+    int counter = 0; 
+    char c;
+    char oa[100]; 
+    
+    printf("\nFile name:");
+    fgets(oa, sizeof(oa), Word_Count);
+    Word_Count = fopen(oa, "r");
+    if (Word_Count == NULL) {
+        printf("\nFile %s not found...\n", oa);
+        return -1;
+    }
+    
+    while ( ! feof(Word_Count) ) {
+        c = fgetc(Word_Count);
+        if ((c>='A' && c<='z') || (c>='0' && c<='9')) {
+            if (in_word == 0) {
+                in_word = 1;
+                counter++;
+            }
+            else 
+                in_word = 1;
+        }
+        else
+            in_word = 0;
+    }
+    
+    printf("\n\nWords : %d\n\n", counter);
+    fclose(Word_Count);
+    return 0;
+}
+            
+    
